@@ -56,9 +56,3 @@ Route::get('/admin', function () {
 Route::get('/salesman', function () {
     return 'your salesman';
 })->middleware('role:salesman');
-
-
-// في routes/web.php
-Route::get('/test-qr', function () {
-    return QrCode::size(300)->generate('Hello World!');
-});
