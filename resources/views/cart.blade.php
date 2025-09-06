@@ -20,7 +20,7 @@
                                 @foreach ($cart->items as $item)
                                     <tr class="table-body-row">
                                         <td class="product-remove">
-                                            <form action="{{ route('cart.remove', $item) }}" method="POST">
+                                            <form action="{{ route('cart.remove', $item->product->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger">حذف</button>

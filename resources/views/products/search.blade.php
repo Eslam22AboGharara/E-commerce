@@ -13,18 +13,30 @@
                             <h3>{{ $item->name }}</h3>
                             <p class="product-price"><span>Per Kg</span> {{ $item->price }}$ </p>
 
-                            <a href="cart.html" class="cart-btn"><i class="fas fa-shopping-cart"></i> إضافه إلى العربه</a>
-                            <a href="{{ route('product.edit', $item->id) }}" class="btn btn-primary"><i
-                                    class="fas fa-edit"></i>
-                                تعديل
-                                المنتج</a>
-                            <form action="{{ route('product.remove', $item->id) }}" method="POST" class="d-inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fas fa-trash"></i> حذف المنتج
-                                </button>
-                            </form>
+                            <div>
+                                <a href="" class="cart-btn"
+                                    onclick="event.preventDefault();
+                                                     document.getElementById('single_pro').submit();"><i
+                                        class="fas fa-shopping-cart"></i> Add to Cart</a>
+                                <form id="single_pro" action="{{ route('cart.add', $item->id) }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                            @if (Auth::user() && Auth::user()->role == 'admin')
+                                <a href="{{ route('product.edit', $item->id) }}" class="btn btn-primary"><i
+                                        class="fas fa-edit"></i>
+                                    تعديل
+                                    المنتج</a>
+                                <form action="{{ route('product.remove', $item->id) }}" method="POST" class="d-inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fas fa-trash"></i> حذف المنتج
+                                    </button>
+                                </form>
+                            @endif
+
                         </div>
                     </div>
                 @endforeach
